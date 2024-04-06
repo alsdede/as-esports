@@ -22,6 +22,7 @@ export function SignIn() {
 
   async function handleSignIn(data: SignInForm) {
     toast.success('Enviadmos um link de autenticação para seu e-mail')
+    console.log('data', data)
   }
 
   return (
