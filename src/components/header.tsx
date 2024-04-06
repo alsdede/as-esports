@@ -1,4 +1,11 @@
-import { Calculator, Dog, Gamepad2, Home, Medal } from 'lucide-react'
+import {
+  Calculator,
+  Dog,
+  Gamepad2,
+  Home,
+  Medal,
+  SquareGanttChart,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { AccountMenu } from './account-menu'
@@ -27,7 +34,11 @@ export function Header() {
             <Medal className="h-4 w-4" />
             Classificação
           </NavLink>
-          <NavLink to="/standings">
+          <NavLink to="/bets">
+            <SquareGanttChart className="h-4 w-4" />
+            Apostas
+          </NavLink>
+          <NavLink to="/calculator">
             <Calculator className="h-4 w-4" />
             Calculadoras
           </NavLink>

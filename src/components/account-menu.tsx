@@ -1,4 +1,7 @@
+import { useQuery } from '@tanstack/react-query'
 import { Building, ChevronDown, LogOut, UserRound } from 'lucide-react'
+
+import { getProfile } from '@/api/get-profile'
 
 import { Button } from './ui/button'
 import {
@@ -11,6 +14,10 @@ import {
 } from './ui/dropdown-menu'
 
 export function AccountMenu() {
+  // const { data: profile } = useQuery({
+  //   queryKey: ['profile'],
+  //   queryFn: getProfile,
+  // })
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
