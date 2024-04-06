@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 
 import { env } from '@/env'
@@ -34,7 +35,8 @@ type Event = {
 export interface GetEventResponse {
   data: { event: Event }
 }
-export async function getEventDetails({ queryKey }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getEventDetails({ queryKey }: any) {
   const [_, id] = queryKey
 
   const res = await axios.get<GetEventResponse>(

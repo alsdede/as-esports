@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Table, useReactTable } from '@tanstack/react-table'
+import { Table } from '@tanstack/react-table'
 import { Search, X } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -7,18 +7,10 @@ import { z } from 'zod'
 
 import { DatePicker } from '@/components/date-picker'
 import { Button } from '@/components/ui/button'
-import { Form, FormField } from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { useFilter } from '@/context/filterContext'
 
-import { Event, GameListTable } from './games-list.types'
+import { Event, League } from './games-list.types'
 
 const FormSchema = z.object({
   team: z.string().min(2, {
@@ -30,10 +22,10 @@ const FormSchema = z.object({
 })
 
 type GamesListFiltersProps = {
-  leagues: any
+  leagues: League
   table: Table<Event>
 }
-export function GamesListFilters({ leagues, table }: GamesListFiltersProps) {
+export function GamesListFilters({ table }: GamesListFiltersProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -43,11 +35,10 @@ export function GamesListFilters({ leagues, table }: GamesListFiltersProps) {
       status: 'all',
     },
   })
-  const { updateFilter } = useFilter()
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log('DATA', data)
-    updateFilter(data)
+
     toast.success(data.league)
   }
   return (

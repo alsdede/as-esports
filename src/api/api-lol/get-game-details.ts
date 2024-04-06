@@ -4,9 +4,11 @@ import { env } from '@/env'
 
 let secondDelay = 60
 let count = 0
-let failureCount = 0
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let failureCount
 
-export async function getGameDetailsResponse({ queryKey }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getGameDetailsResponse({ queryKey }: any) {
   const [_, { gameId }] = queryKey
   const date = getISODateMultiplyOf10()
   if (count++ % 10 === 0) {
@@ -15,14 +17,13 @@ export async function getGameDetailsResponse({ queryKey }) {
   }
 
   console.log('gameId', gameId)
-  const res = axios.get(`${env.VITE_API_URL_LIVE}/details/${gameId}`, {
+  const res = await axios.get(`${env.VITE_API_URL_LIVE}/details/${gameId}`, {
     params: {
       startingTime: date,
     },
     headers: {},
   })
 
-  console.log('res', res.data)
   return res.data
 }
 

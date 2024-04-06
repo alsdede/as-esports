@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 
@@ -20,11 +21,11 @@ export function Calculator() {
   const [oddB, setOddB] = useState<number | null>(null)
   const [valueB, setValueB] = useState<number | null>(null)
   const [resultA, setResultA] = useState<number | null>(null)
-  const [resultB, setResultB] = useState<number | null>(null)
+  const [resultB] = useState<number | null>(null)
   const [profitA, setProfitA] = useState<number | null>(null)
-  const [profitB, setProfitB] = useState<number | null>(null)
-  const [profitTotal, setProfitTotal] = useState<number | null>(null)
-  const [tableData, setTableData] = useState([])
+  const [profitB] = useState<number | null>(null)
+  const [profitTotal] = useState<number | null>(null)
+  const [tableData, setTableData] = useState<any>([])
   // Function to handle changes in Odd A
   const handleOddAChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,22 +56,21 @@ export function Calculator() {
   useEffect(() => {
     if (oddA !== null && valueA !== null) {
       setResultA(oddA * valueA)
-      setProfitA(resultA - valueA)
+      setProfitA(resultA! - valueA)
     }
   }, [oddA, resultA, valueA])
   useEffect(() => {
     const data = []
-    const auxResultB = 0
 
     for (let i = 11; i <= 50; i++) {
       const oddValue = i / 10
 
-      const auxResultB = oddValue * valueB
-      const auxValueB = resultA / oddValue
-      const auxProfitB = auxValueB * oddValue - auxValueB - valueA
-      const auxPercentage = (auxProfitB / profitA) * 100
+      const auxResultB = oddValue * valueB!
+      const auxValueB = resultA! / oddValue
+      const auxProfitB = auxValueB * oddValue - auxValueB - valueA!
+      const auxPercentage = (auxProfitB / profitA!) * 100
 
-      const auxProfitA = profitA + auxProfitB - profitA
+      const auxProfitA = profitA! + auxProfitB - profitA!
       console.log('A', auxValueB, oddValue, auxResultB, auxValueB)
       data.push({
         oddB: oddValue.toFixed(2),
@@ -87,16 +87,15 @@ export function Calculator() {
   }, [profitA, resultA, valueA, valueB])
   const calculateFreebetProfit = () => {
     const data = []
-    const auxResultB = 0
 
     for (let i = 11; i <= 50; i++) {
       const oddValue = i / 10
 
-      const auxResultB = oddValue * valueB
-      const auxValueB = resultA / oddValue
-      const auxProfitB = auxValueB * oddValue - auxValueB - valueA
+      const auxResultB = oddValue * valueB!
+      const auxValueB = resultA! / oddValue
+      const auxProfitB = auxValueB * oddValue - auxValueB - valueA!
 
-      const auxProfitA = profitA + auxProfitB - profitA
+      const auxProfitA = profitA! + auxProfitB - profitA!
 
       data.push({
         oddB: oddValue.toFixed(2),

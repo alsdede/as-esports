@@ -1,9 +1,5 @@
-import { DollarSign } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-import { DayBetsAmountCard } from './day-bets-amount-card'
 import { MonthBetsAmountCard } from './month-bets-amount-card'
 import { MonthLosesBetsCard } from './month-loses-bets-card'
 import { MonthRevenueCard } from './month-revenue-card'

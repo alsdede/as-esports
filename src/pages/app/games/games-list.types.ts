@@ -38,6 +38,7 @@ export type Match = {
   teams: Team[]
 }
 export type Event = {
+  date: string
   blockName: string
   league: League
   match: Match
@@ -62,4 +63,8 @@ export type GameListTable = {
   state: 'completed' | 'unstarted' | 'inProgress'
   live: string
   action: string
+}
+
+export type State = {
+  state: 'completed' | 'unstarted' | 'inProgress'
 }

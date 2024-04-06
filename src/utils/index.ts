@@ -1,4 +1,4 @@
-import { Event, Schedule } from '@/pages/app/games/games-list.types'
+import { Match, Schedule, Team } from '@/pages/app/games/games-list.types'
 
 export function getGameStatus(state: 'completed' | 'unstarted' | 'inProgress') {
   const gameState = {
@@ -10,6 +10,15 @@ export function getGameStatus(state: 'completed' | 'unstarted' | 'inProgress') {
   return gameState[state] || ''
 }
 
+export type EventsTable = {
+  date: string
+  league: string
+  teams: Team[]
+  result: Team[]
+  state: 'completed' | 'unstarted' | 'inProgress'
+  record: Team[]
+  match: Match
+}
 export function transformScheduleData(schedule: Schedule) {
   const events = schedule?.events?.map((event) => ({
     date: event.startTime,
@@ -30,8 +39,9 @@ const format = {
 export function formatGameStatus(state: keyof typeof format) {
   return format[state]
 }
-
-export function goldDiff({ player, windowRes }: any) {
+// ts-ignore
+// eslint-disable-next-line
+export function goldDiff({ player, windowRes }:any) {
   const blueTeam = windowRes?.frames[windowRes?.frames?.length - 1]?.blueTeam
   const redTeam = windowRes?.frames[windowRes?.frames?.length - 1]?.redTeam
   console.log('dasdsada', player)

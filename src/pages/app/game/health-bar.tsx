@@ -3,8 +3,6 @@ type HealthBarProps = {
   maxHealth: number
 }
 export function HealthBar({ currentHealth, maxHealth }: HealthBarProps) {
-  const life = percentage(currentHealth, maxHealth) + '%'
-
   return (
     <div className="relative h-6 w-full min-w-24 rounded-xl bg-slate-400">
       <div

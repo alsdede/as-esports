@@ -1,38 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
-} from '@tanstack/react-table'
-import { format } from 'date-fns'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
 
 import { getScheduleResponse } from '@/api/api-lol/get-schedule'
 import { Pagination } from '@/components/pagination'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { useFilter } from '@/context/filterContext'
-import { getGameStatus, transformScheduleData } from '@/utils'
-import { makeData, Person } from '@/utils/makeData'
+import { transformScheduleData } from '@/utils'
 
 import { columns } from './columns'
-import { League, Team } from './games-list.types'
-import { GamesListFilters } from './games-list-filters'
 import { DataTable } from './table'
 
 export function GamesList() {
@@ -46,8 +20,8 @@ export function GamesList() {
   // const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   // const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   // const [rowSelection, setRowSelection] = useState({})
-  const [search, setSearch] = useState('')
-  const [leagues, setLeagues] = useState<any[]>([])
+  // const [search, setSearch] = useState('')
+  // const [leagues, setLeagues] = useState<any[]>([])
 
   const { data: schedule, isLoading } = useQuery({
     queryKey: ['schedule'],
@@ -55,11 +29,12 @@ export function GamesList() {
   })
 
   console.log('schedule', schedule)
-  const data = useMemo(() => transformScheduleData(schedule) ?? [], [schedule])
+  const data = useMemo(() => transformScheduleData(schedule!) ?? [], [schedule])
 
   console.log('data', data)
   if (isLoading || !schedule) return <div>loading</div>
   console.log('data', data[0])
+
   return (
     <>
       <Helmet title="Jogos" />

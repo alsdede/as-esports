@@ -1,18 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query'
 import { Clock } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 
-import {
-  getEventDetails,
-  GetEventResponse,
-} from '@/api/api-lol/get-event-details'
-import {
-  getGameDetailsResponse,
-  getISODateMultiplyOf10,
-} from '@/api/api-lol/get-game-details'
-import { getItemsResponse } from '@/api/api-lol/get-items'
-import { getScheduleResponse } from '@/api/api-lol/get-schedule'
+import { getEventDetails } from '@/api/api-lol/get-event-details'
 import { getWindowResponse } from '@/api/api-lol/get-window'
 import BaronIcon from '@/components/icons/BaronIcon'
 import GoldIcon from '@/components/icons/GoldIcon'
@@ -31,7 +23,6 @@ import { env } from '@/env'
 import { formatGameStatus, goldDiff } from '@/utils'
 
 import { HealthBar } from './health-bar'
-import { Items } from './items'
 
 const ICONS = [
   {
@@ -67,7 +58,7 @@ const ICONS = [
 ]
 const reversedICONS = [...ICONS].reverse()
 export function Game() {
-  const [windowRes, setWindowRes] = useState([])
+  const [windowRes, setWindowRes] = useState<any>([])
   const id = '111561319410825193'
   // const date = getISODateMultiplyOf10()
   const { data: eventDetails, isLoading: isLoadingEventDetails } = useQuery({

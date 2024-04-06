@@ -1,4 +1,4 @@
-import { env } from '@/env'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const ITEMS = [
   {
@@ -43,19 +43,18 @@ export type ItemsProps = {
   itemsFrame: any
   items: Item[]
 }
-export function Items({ playerId, itemsFrame, items }: ItemsProps) {
+export function Items({ playerId, itemsFrame }: ItemsProps) {
   console.log('items', itemsFrame)
   return (
     <div className="flex min-w-32 flex-row flex-wrap items-center justify-center gap-0">
-      {ITEMS.map((item, index) => (
-        <div key={`${playerId}-${index}`}>
-          <img
+      {/* {ITEMS.map((item, index) => (
+        <div key={`${playerId}-${index}`}> */}
+      {/* <img
             src={`${env.VITE_ITEMS_URL}${lastFrameItems[i]}.png`}
             alt="item"
             className="h-8 w-8 rounded-lg"
-          />
-        </div>
-      ))}
+          /> */}
+      {/* </div> */}
     </div>
   )
 }

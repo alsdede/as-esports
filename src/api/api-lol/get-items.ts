@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export async function getItemsResponse({ queryKey }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getItemsResponse({ queryKey }: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, metadata] = queryKey
 
   const formattedPatchVersion =

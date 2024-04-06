@@ -1,17 +1,18 @@
+/* eslint-disable */
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { ArrowUpDown } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { TableCell } from '@/components/ui/table'
-import { getGameStatus } from '@/utils'
+import { EventsTable, getGameStatus } from '@/utils'
 
-import { Event } from './games-list.types'
+import {  League, Result, State, Team } from './games-list.types'
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-export const columns: ColumnDef<Event>[] = [
+export const columns: ColumnDef<EventsTable>[] = [
   {
     accessorKey: 'date',
     sortingFn: (rowA, rowB) => {
@@ -30,7 +31,7 @@ export const columns: ColumnDef<Event>[] = [
         date2.setDate(date2.getDate() + 1)
       }
 
-      return date1 - date2
+      return date1.getTime() - date2.getTime()
     },
     header: ({ column }) => {
       return (
@@ -44,7 +45,7 @@ export const columns: ColumnDef<Event>[] = [
       )
     },
     cell: ({ row }) => {
-      const date = row.getValue('date')
+      const date = row.getValue('date') as string
 
       return (
         <TableCell className="text-cs font-mono font-medium">
@@ -69,7 +70,7 @@ export const columns: ColumnDef<Event>[] = [
       )
     },
     cell: ({ row }) => {
-      const league = row.getValue('league')
+      const league = row.getValue('league') as League["name"]
 
       return <TableCell className="font-medium">{league}</TableCell>
     },
@@ -91,7 +92,7 @@ export const columns: ColumnDef<Event>[] = [
       )
     },
     cell: ({ row }) => {
-      const teams = row.getValue('teams')
+      const teams = row.getValue('teams') as Team []
 
       return (
         <TableCell>
@@ -133,7 +134,10 @@ export const columns: ColumnDef<Event>[] = [
       )
     },
     cell: ({ row }) => {
-      const result = row.getValue('result')
+      type ResultType = {
+        result: Result
+      }
+      const result = row.getValue('result')  as ResultType []
 
       return (
         <TableCell className="font-medium">
@@ -170,7 +174,7 @@ export const columns: ColumnDef<Event>[] = [
               className={`h-4 w-4 rounded-full ${state === 'completed' ? 'bg-green-400' : state === 'unstarted' ? 'bg-red-400' : 'bg-slate-400'}`}
             />
             <span className="font-medium text-muted-foreground">
-              {getGameStatus(state)}
+              {getGameStatus(state as State["state"])}
             </span>
           </div>
         </TableCell>
